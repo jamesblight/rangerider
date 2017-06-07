@@ -1,7 +1,7 @@
 # Range Rider
 This is a simple prototype and shouldn't be used in production.
 
-### Instal Dependancies
+### Install Dependencies
 Run ```npm install```
 
 ### To build
