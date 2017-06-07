@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RangeRider Example</title>
+    <link rel="stylesheet" type="text/css" href="../dist/rr.style.css">
+    <style>
+      #main-container {
+        background-color: #00A8FF;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      #slider-container {
+          width: 300px;
+          margin: 20px auto;
+      }
+
+      #range-value {
+          text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-container">
+      <div id="slider-container"></div>
+      <h2 id="range-value"></h2>
+    </div>
+
+    <script type="text/javascript" src="../dist/rr.bundle.js"></script>
+    <script type="text/javascript">
+      // element to attach the slider to
+      var anchor = document.getElementById('slider-container'),
+          rangeValue = document.getElementById('range-value');
+
+      // create our range slider
+      RangeRider.create({
+        anchor: anchor,
+        range: [0, 10],
+        start: [0, 10],
+        step: 2,
+        onSlide: function () {
+            rangeValue.innerHTML = this.lower + ' - ' + this.upper
+        }
+      });
+    </script>
+  </body>
+</html>

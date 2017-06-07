@@ -1,0 +1,19 @@
+{
+  "name": "rangerider",
+  "version": "1.0.0",
+  "description": "A range slider that support single and dual handles",
+  "main": "rollup.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^0.42.0"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesblight/rangerider.git"
+  },
+  "author": "James Blight",
+  "license": "ISC"
+}

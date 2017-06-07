@@ -1,0 +1,40 @@
+.ui-slider {
+    position: relative;
+    height: 8px;
+    width: 100%;
+    margin: 15px 0;
+}
+.ui-slider-range {
+    position: absolute;
+    height: 8px;
+    background-color: #FF6329;
+    cursor: grab cursor: -webkit-grab;
+}
+
+.ui-slider-handle-origin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.ui-slider-handle {
+    position: relative;
+    height: 16px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px 0px #BEBEBE inset;
+    border-radius: 2px;
+    width: 16px;
+    top: -4px;
+    left: -8px;
+    cursor: pointer;
+}
+
+.ui-slider-background {
+  background-color: #CCCCCC;
+}
+
+.ui-slider-connect {
+  background-color: #FF6329;
+}
