@@ -16,7 +16,7 @@ Use rr.bundle.js and rr.style.css in your project
 var anchor = document.getElementById('slider-container');
 
 // create our dual range slider
-rangeRider({
+RangeRider({
     anchor: anchor,
     range: [0, 10],
     start: [0, 10]
