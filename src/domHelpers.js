@@ -48,17 +48,14 @@ export function addHandles(anchor, options) {
     origin = document.createElement('div');
     addClass(origin, classes[4]);
     anchor.appendChild(origin);
-
     handles.push(addHandle(origin, options));
   }
 
   // If we have multiple handles then set the classes to display a coloured connection bar
   // |-------[============]---|
   if (handles.length > 1) {
-
     // Add the connect class to the first handle to show a connection bar
     addClass(handles[0].parentNode, classes[7]);
-
     // Add the background class to the second handle to hide the connection bar beyond the handle
     addClass(handles[1].parentNode, classes[6]);
   }

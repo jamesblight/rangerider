@@ -45,13 +45,8 @@ function RangeRider(options) {
     return location - remainder;
   }
 
-  function getContainerOffset() {
-    return getBounds(base);
-  }
-
   // Attach events to appropriate slider parts
   function attachEvents() {
-
     // Add the 'mousedown' listeners to the handles
     for (var index = 0; index < handles.length; index++) {
       handles[index].addEventListener(actions.start, start);
@@ -174,8 +169,9 @@ function RangeRider(options) {
 
   // Handle mousemove and touchmove event for handle
   function move(event) {
-    var dif,
-      containerOffset = getContainerOffset(),
+    var handleOffset,
+      pageXOffset,
+      containerBounds = getBounds(base),
       pageX;
 
     // Check if it is a touch event
@@ -187,20 +183,19 @@ function RangeRider(options) {
       pageX = event.pageX;
     }
 
-    dif = pageX - containerOffset.left + selectedHandle.offset;
-
-    dif = Math.min(Math.max(0, (dif / containerOffset.width * 100)), 100);
+    pageXOffset = pageX - containerBounds.left + selectedHandle.offset;
+    handleOffset = Math.min(Math.max(0, (pageXOffset / containerBounds.width * 100)), 100);
 
     // Which handle is selected?
     if (selectedHandle === handles[0]) {
       // Lower handle selected
       // limit the slider to either the upper handle (if it exists) or the upper range ( 100% )
-      locations[0] = Math.min(dif, locations.length > 1
+      locations[0] = Math.min(handleOffset, locations.length > 1
         ? locations[1]
         : 100);
     } else {
       // Upper handle selected
-      locations[1] = Math.max(dif, locations[0]);
+      locations[1] = Math.max(handleOffset, locations[0]);
     }
 
     setHandlePositions(locations);
@@ -212,7 +207,6 @@ function RangeRider(options) {
 
   // Handle mouse up event
   function end(event) {
-
     // Check if it is a touch event
     if (typeof event.touches !== 'undefined') {
       // Emulate left click
@@ -236,16 +230,14 @@ function RangeRider(options) {
     }
   }
 
+  // Placeholder methods. They can be overriden by passing callbacks via options
   // Handler invoked on start - Interface method.
-  // It does nothing, because it should be overridden.
   this.onStart = function() {};
 
-  // Handler invoked on start - Interface method.
-  // It does nothing, because it should be overridden.
+  // Handler invoked on move - Interface method.
   this.onSlide = function() {};
 
   // Handler invoked on end (mouse up) - Interface method.
-  // It does nothing, because it should be overridden
   this.onEnd = function() {};
 
   // Attaches the Range Rider to a DOM element
@@ -368,5 +360,5 @@ function create(options) {
 }
 
 export default {
-  create
+  create: create
 };
