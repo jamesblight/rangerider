@@ -5,7 +5,7 @@ This is a simple prototype and shouldn't be used in production.
 Run ```npm install```
 
 ### To build
-Run ```npm build```
+Run ```npm run build```
 
 Use rr.bundle.js and rr.style.css in your project
 

@@ -25,8 +25,6 @@ export default function validateOptions(options) {
   }
 
   // Optionals
-  // Default value will be given for the start option
-
   // If start option is undefined then give it the default value of range min
   if (typeof options.start !== 'undefined') {
     if (Array.isArray(options.start) && options.start.length !== 0) {

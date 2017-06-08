@@ -31,9 +31,26 @@ function RangeRider(options) {
     selectedHandle,
     locations,
     prevAnchor = null,
-    self = this,
     step = options.step,
-    stepPercentage;
+    stepPercentage,
+    // Placeholder methods. They can be overriden by passing callbacks via options
+    // Callback invoked on start
+    onStart = function() {},
+    // Callback invoked on move
+    onSlide = function() {},
+    // Callback invoked on end (mouse up)
+    onEnd = function() {};
+
+    // Set callbacks if defined
+    if (options.hasOwnProperty('onStart') && typeof options.onStart === 'function') {
+      onStart = options.onStart.bind(this);
+    }
+    if (options.hasOwnProperty('onSlide') && typeof options.onSlide === 'function') {
+      onSlide = options.onSlide.bind(this);
+    }
+    if (options.hasOwnProperty('onEnd') && typeof options.onEnd === 'function') {
+      onEnd = options.onEnd.bind(this);
+    }
 
   // Clamp the location to an increment of the step
   function applyStep(location, stepPercentage) {
@@ -163,7 +180,7 @@ function RangeRider(options) {
       window.addEventListener(actions.endTouch, end);
 
       // Invoke onStart handler
-      self.onStart();
+      onStart();
     }
   }
 
@@ -202,7 +219,7 @@ function RangeRider(options) {
     setDataValues(locations);
 
     // Invoke onSlide handler
-    self.onSlide();
+    onSlide();
   }
 
   // Handle mouse up event
@@ -226,19 +243,11 @@ function RangeRider(options) {
       selectedHandle = null;
 
       // Invoke onEnd handler
-      self.onEnd();
+      onEnd();
     }
   }
 
-  // Placeholder methods. They can be overriden by passing callbacks via options
-  // Handler invoked on start - Interface method.
-  this.onStart = function() {};
-
-  // Handler invoked on move - Interface method.
-  this.onSlide = function() {};
-
-  // Handler invoked on end (mouse up) - Interface method.
-  this.onEnd = function() {};
+  // Exposed API
 
   // Attaches the Range Rider to a DOM element
   this.setAnchor = function(anchor) {
@@ -318,22 +327,9 @@ function RangeRider(options) {
     }
   });
 
-  // Initialize the slider
-
   // set the style to be modified for handles
   // 'left' for horizontal slider
   options.style = 'left';
-
-  // Set handlers if defined
-  if (options.hasOwnProperty('onStart') && typeof options.onStart === 'function') {
-    this.onStart = options.onStart;
-  }
-  if (options.hasOwnProperty('onSlide') && typeof options.onSlide === 'function') {
-    this.onSlide = options.onSlide;
-  }
-  if (options.hasOwnProperty('onEnd') && typeof options.onEnd === 'function') {
-    this.onEnd = options.onEnd;
-  }
 
   // Set the anchor (DOM element) if defined
   if (typeof options.anchor !== 'undefined') {
